@@ -1,80 +1,16 @@
-wget -O portxtrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/port/portxtrgrpc.sh"
-chmod +x portxtrgrpc
+wget -O port-trgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/port/port-trgrpc.sh"
+chmod +x port-trgrpc
 
-wget -O port-grpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/port/port-grpc.sh"
-chmod +x port-grpc 
+wget -O port-grpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/port/port-vlgrpc.sh"
+chmod +x port-vlgrpc 
 
-wget -O menu-trgo "https://raw.githubusercontent.com/izhanworks/izvpn2/main/menu/menu-trgo.sh"
-chmod +x menu-trgo
-
-cat > /etc/systemd/system/vm-grpc.service << EOF
-[Unit]
-Description=XRay VMess GRPC Service
-Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
-After=network.target nss-lookup.target
-[Service]
-User=root
-NoNewPrivileges=true
-ExecStart=/usr/local/bin/xray -config /etc/xray/vm-grpc.json
-RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
-[Install]
-WantedBy=multi-user.target
-EOF
-
-cat > /etc/systemd/system/vmess-grpc.service << EOF
-[Unit]
-Description=XRay VMess GRPC Service
-Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
-After=network.target nss-lookup.target
-[Service]
-User=root
-NoNewPrivileges=true
-ExecStart=/usr/local/bin/xray -config /etc/xray/vmessgrpc.json
-RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
-[Install]
-WantedBy=multi-user.target
-EOF
-
-cat > /etc/systemd/system/vless-grpc.service << EOF
-[Unit]
-Description=XRay VMess GRPC Service
-Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
-After=network.target nss-lookup.target
-[Service]
-User=root
-NoNewPrivileges=true
-ExecStart=/usr/local/bin/xray -config /etc/xray/vlessgrpc.json
-RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
-[Install]
-WantedBy=multi-user.target
-EOF
-
-cat > /etc/systemd/system/x-trgrpc.service << EOF
-[Unit]
-Description=XRay Trojan Grpc Service
-Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
-After=network.target nss-lookup.target
-[Service]
-User=root
-NoNewPrivileges=true
-ExecStart=/usr/local/bin/xray -config /etc/xray/trojangrpc.json
-RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
-[Install]
-WantedBy=multi-user.target
-EOF
+wget -O menu-grpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/menu/menu-grpc.sh"
+chmod +x menu-grpc
 
 service squid start
 
 
-cat > /etc/xray/vmessgrpc.json << EOF
+cat > /etc/rare/xray/conf/vmessgrpc.json << EOF
 {
     "log": {
             "access": "/var/log/xray/access5.log",
@@ -83,7 +19,7 @@ cat > /etc/xray/vmessgrpc.json << EOF
     },
     "inbounds": [
         {
-            "port": 80,
+            "port": 800,
             "protocol": "vmess",
             "settings": {
                 "clients": [
@@ -124,7 +60,7 @@ cat > /etc/xray/vmessgrpc.json << EOF
 }
 EOF
 
-cat > /etc/xray/vlessgrpc.json << EOF
+cat > /etc/rare/xray/conf/vlessgrpc.json << EOF
 {
     "log": {
             "access": "/var/log/xray/access5.log",
@@ -174,7 +110,7 @@ cat > /etc/xray/vlessgrpc.json << EOF
 }
 EOF
 
-cat > /etc/xray/trojangrpc.json << EOF
+cat > /etc/rare/xray/conf/trojangrpc.json << EOF
 {
     "log": {
             "access": "/var/log/xray/access5.log",
@@ -228,14 +164,12 @@ cat > /etc/xray/akuntrgrpc.conf << EOF
 #xray-trojangrpc user
 EOF
 
-cat > /etc/xray/akun.conf << EOF
-#xray-trojan user
-EOF
-
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 800 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 800 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 880 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 880 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 653 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 653 -j ACCEPT
-
-
 
 
 iptables-save > /etc/iptables.up.rules
@@ -243,80 +177,27 @@ iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
 systemctl daemon-reload
-systemctl enable xr-vm-tls.service
-systemctl start xr-vm-tls.service
-systemctl enable xr-vm-ntls.service
-systemctl start xr-vm-ntls.service
-systemctl enable xr-vm-mk.service
-systemctl start xr-vm-mk.service
-systemctl enable xr-vl-tls.service
-systemctl start xr-vl-tls.service
-systemctl enable xr-vl-ntls.service
-systemctl start xr-vl-ntls.service
-systemctl restart xtls.service
-systemctl enable xtls.service
-systemctl enable x-tr
-systemctl start x-tr 
-systemctl enable vmess-grpc
-systemctl restart vmess-grpc
-systemctl enable vless-grpc
-systemctl restart vless-grpc
-systemctl enable x-trgrpc.service
-systemctl start x-trgrpc.service
+systemctl restart xray.service
 
 cd /usr/bin
 
-
-wget -O addgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/add/addxvgrpc.sh"
-wget -O addgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/add/addxvgrpc.sh"
-wget -O delxvmess "https://raw.githubusercontent.com/izhanworks/izvpn2/main/del/delxv2ray.sh"
-
-
-
+wget -O addgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/add/addgrpc.sh"
 wget -O delgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/del/delgrpc.sh"
-
-
-
-
 wget -O cekgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/cek/cekgrpc.sh"
-
-
-
-
 wget -O renewgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/renew/renewgrpc.sh"
 
+wget -O addtrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/add/addtrgrpc.sh"
+wget -O deltrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/del/deltrgrpc.sh"
+wget -O cektrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/cek/cektrgrpc.sh"
+wget -O renewtrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/cek/renewtrgrpc.sh"
 
-
-wget -O trialgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/trial/trialgrpc.sh"
-wget -O addxtrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/add/addxtrgrpc.sh"
-wget -O delxtrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/del/delxtrgrpc.sh"
-wget -O cekxtrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/cek/cekxtrgrpc.sh"
-wget -O renewxtrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/cek/renewxtrgrpc.sh"
-chmod +x addxvmess
-chmod +x addxvless
-chmod +x addxtrojan
-chmod +x addxtls
 chmod +x addgrpc
-chmod +x delxvless
-chmod +x delxvmess
-chmod +x delxtrojan
-chmod +x delxtls
 chmod +x delgrpc
-chmod +x cekxvmess
-chmod +x cekxvless
-chmod +x cekxtrojan
-chmod +x cekxtls
 chmod +x cekgrpc
-chmod +x renewxvmess
-chmod +x renewxvless
-chmod +x renewxtrojan
-chmod +x renewxtls
 chmod +x renewgrpc
-chmod +x trialxvmess
-chmod +x trialxvmess
-chmod +x trialgrpc
-chmod +x addxtrgrpc
-chmod +x delxtrgrpc
-chmod +x cekxtrgrpc
-chmod +x renewxtrgrpc
+
+chmod +x addtrgrpc
+chmod +x deltrgrpc
+chmod +x cektrgrpc
+chmod +x renewtrgrpc
 
