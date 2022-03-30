@@ -64,7 +64,7 @@ After=network.target nss-lookup.target
 [Service]
 User=root
 NoNewPrivileges=true
-ExecStart=/etc/rare/xray/xray -config /etc/rare/xray/grpcvmessgrpc.json
+ExecStart=/etc/rare/xray/xray -config /etc/rare/xray/grpc/vmessgrpc.json
 RestartPreventExitStatus=23
 LimitNPROC=10000
 LimitNOFILE=1000000
