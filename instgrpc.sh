@@ -1,4 +1,5 @@
 systemctl stop xray.service
+mkdir /etc/rare/xray/grpc
 cd /usr/bin
 
 wget -O port-trgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/port-trgrpc.sh"
