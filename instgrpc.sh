@@ -1,3 +1,5 @@
+cd /usr/bin
+
 wget -O port-trgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/port-trgrpc.sh"
 chmod +x port-trgrpc
 
@@ -178,8 +180,6 @@ netfilter-persistent save
 netfilter-persistent reload
 systemctl daemon-reload
 systemctl restart xray.service
-
-cd /usr/bin
 
 wget -O addgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/addgrpc.sh"
 wget -O delgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/delgrpc.sh"
