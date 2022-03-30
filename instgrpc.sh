@@ -1,3 +1,4 @@
+systemctl stop xray.service
 cd /usr/bin
 
 wget -O port-trgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/port-trgrpc.sh"
@@ -12,7 +13,7 @@ chmod +x menu-grpc
 service squid start
 
 
-cat > /etc/rare/xray/conf/vmessgrpc.json << EOF
+cat > /etc/rare/xray/grpc/vmessgrpc.json << EOF
 {
     "log": {
             "access": "/var/log/xray/access5.log",
@@ -42,8 +43,8 @@ cat > /etc/rare/xray/conf/vmessgrpc.json << EOF
                     ],
                     "certificates": [
                         {
-                            "certificateFile": "/etc/xray/xray.crt",
-                            "keyFile": "/etc/xray/xray.key"
+                            "certificateFile": "/etc/rare/xray/xray.crt",
+                            "keyFile": "/etc/rare/xray/xray.key"
                         }
                     ]
                 },
@@ -62,7 +63,7 @@ cat > /etc/rare/xray/conf/vmessgrpc.json << EOF
 }
 EOF
 
-cat > /etc/rare/xray/conf/vlessgrpc.json << EOF
+cat > /etc/rare/xray/grpc/vlessgrpc.json << EOF
 {
     "log": {
             "access": "/var/log/xray/access5.log",
@@ -92,8 +93,8 @@ cat > /etc/rare/xray/conf/vlessgrpc.json << EOF
                     ],
                     "certificates": [
                         {
-                            "certificateFile": "/etc/xray/xray.crt",
-                            "keyFile": "/etc/xray/xray.key"
+                            "certificateFile": "/etc/rare/xray/xray.crt",
+                            "keyFile": "/etc/rare/xray/xray.key"
                         }
                     ]
                 },
@@ -112,7 +113,7 @@ cat > /etc/rare/xray/conf/vlessgrpc.json << EOF
 }
 EOF
 
-cat > /etc/rare/xray/conf/trojangrpc.json << EOF
+cat > /etc/rare/xray/grpc/trojangrpc.json << EOF
 {
     "log": {
             "access": "/var/log/xray/access5.log",
@@ -142,8 +143,8 @@ cat > /etc/rare/xray/conf/trojangrpc.json << EOF
                     ],
                     "certificates": [
                         {
-                            "certificateFile": "/etc/xray/xray.crt",
-                            "keyFile": "/etc/xray/xray.key"
+                            "certificateFile": "/etc/rare/xray/xray.crt",
+                            "keyFile": "/etc/rare/xray/xray.key"
                         }
                     ]
                 },
@@ -162,7 +163,7 @@ cat > /etc/rare/xray/conf/trojangrpc.json << EOF
 }
 EOF
 
-cat > /etc/rare/xray/conf/akuntrgrpc.conf << EOF
+cat > /etc/rare/xray/grpc/akuntrgrpc.conf << EOF
 #xray-trojangrpc user
 EOF
 
@@ -203,3 +204,4 @@ chmod +x renewtrgrpc
 
 cd
 rm /root/instgrpc.sh
+systemctl start xray.service
