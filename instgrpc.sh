@@ -3,10 +3,10 @@ cd /usr/bin
 wget -O port-trgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/port-trgrpc.sh"
 chmod +x port-trgrpc
 
-wget -O port-grpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/port/port-grpc.sh"
+wget -O port-grpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/port-grpc.sh"
 chmod +x port-grpc 
 
-wget -O menu-grpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/menu/menu-grpc.sh"
+wget -O menu-grpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/menu-grpc.sh"
 chmod +x menu-grpc
 
 service squid start
