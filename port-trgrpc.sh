@@ -18,7 +18,7 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 
 MYIP=$(curl -sS ipv4.icanhazip.com)
 clear
-tr="$(cat /etc/rare/xray/grpc/trojangrpc.json | grep local_port | sed 's/local_port//g' | sed 's/    "": //g' | sed 's/,//g')"
+tr="$(cat /etc/rare/xray/grpc/trojangrpc.json | grep port | sed 's/port//g'| sed 's/            "": //g' | sed 's/,//g')"
 echo -e "======================================"
 
 echo -e "Change Port $tr"
