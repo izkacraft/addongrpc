@@ -91,7 +91,7 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 read -p "Pilihan :" menu
 case $menu in
 1) clear ; addtrgrpc ;;
-2) clear ; grpc-menu ;;
+2) clear ; menu-grpc ;;
 3) clear ; menu ;;
 *) echo  "Invalid entry" ; sleep 3 ; exit ;;
 esac
