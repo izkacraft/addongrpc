@@ -21,7 +21,7 @@ clear
 tr="$(cat /etc/rare/xray/grpc/trojangrpc.json | grep port | sed 's/port//g'| sed 's/            "": //g' | sed 's/,//g')"
 echo -e "======================================"
 
-echo -e "Change Port $tr"
+echo -e "Change Port Trojan Grpc $tr"
 
 echo -e "======================================"
 read -p "New Port Trojan Grpc : " tr2
