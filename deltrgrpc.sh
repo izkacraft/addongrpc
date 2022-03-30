@@ -4,7 +4,7 @@
 #########################
 MYIP=$(curl -sS ipv4.icanhazip.com)
 clear
-NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/rare/xray/conf/akuntrgrpc.conf")
+NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/rare/xray/grpc/akuntrgrpc.conf")
 	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
 		echo ""
 		echo "You have no existing clients!"
@@ -16,7 +16,7 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/rare/xray/conf/akuntrgrpc.conf")
 	echo " Press CTRL+C to return"
 	echo " ==============================="
 	echo "     No  Expired   User"
-	grep -E "^### " "/etc/rare/xray/conf/akuntrgrpc.conf" | cut -d ' ' -f 2-3 | nl -s ') '
+	grep -E "^### " "/etc/rare/xray/grpc/akuntrgrpc.conf" | cut -d ' ' -f 2-3 | nl -s ') '
 	until [[ ${CLIENT_NUMBER} -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
 		if [[ ${CLIENT_NUMBER} == '1' ]]; then
 			read -rp "Select one client [1]: " CLIENT_NUMBER
@@ -24,11 +24,11 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/rare/xray/conf/akuntrgrpc.conf")
 			read -rp "Select one client [1-${NUMBER_OF_CLIENTS}]: " CLIENT_NUMBER
 		fi
 	done
-user=$(grep -E "^### " "/etc/rare/xray/conf/akuntrgrpc.conf" | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
-exp=$(grep -E "^### " "/etc/rare/xray/conf/akuntrgrpc.conf" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
-sed -i "^### $user $exp/,/^},{/d" /etc/rare/xray/conf/akuntrgrpc.conf
-sed -i "^### $user $exp/,/^},{/d" /etc/rare/xray/conf/trojangrpc.json
-systemctl restart xray.service
+user=$(grep -E "^### " "/etc/rare/xray/grpc/akuntrgrpc.conf" | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
+exp=$(grep -E "^### " "/etc/rare/xray/grpc/akuntrgrpc.conf" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
+sed -i "^### $user $exp/,/^},{/d" /etc/rare/xray/grpc/akuntrgrpc.conf
+sed -i "^### $user $exp/,/^},{/d" /etc/rare/xray/grpc/trojangrpc.json
+systemctl restart trgrpc
 service cron restart
 clear
 echo ""
