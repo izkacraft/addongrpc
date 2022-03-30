@@ -18,7 +18,7 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 MYIP=$(curl -sS ipv4.icanhazip.com)
 clear
 echo -n > /tmp/other.txt
-data=( `cat /etc/rare/xray/conf/trojangrpc.json | grep '^###' | cut -d ' ' -f 2`);
+data=( `cat /etc/rare/xray/grpc/trojangrpc.json | grep '^###' | cut -d ' ' -f 2`);
 echo "-----------------------------------------";
 echo "---------=[ Trojan Grpc Login ]=---------";
 echo "-----------------------------------------";
