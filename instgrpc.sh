@@ -1,10 +1,10 @@
-wget -O port-trgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/port/port-trgrpc.sh"
+wget -O port-trgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/port-trgrpc.sh"
 chmod +x port-trgrpc
 
-wget -O port-grpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/port/port-vlgrpc.sh"
+wget -O port-grpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/port/port-vlgrpc.sh"
 chmod +x port-vlgrpc 
 
-wget -O menu-grpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/menu/menu-grpc.sh"
+wget -O menu-grpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/menu/menu-grpc.sh"
 chmod +x menu-grpc
 
 service squid start
@@ -181,15 +181,15 @@ systemctl restart xray.service
 
 cd /usr/bin
 
-wget -O addgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/add/addgrpc.sh"
-wget -O delgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/del/delgrpc.sh"
-wget -O cekgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/cek/cekgrpc.sh"
-wget -O renewgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/renew/renewgrpc.sh"
+wget -O addgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/addgrpc.sh"
+wget -O delgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/delgrpc.sh"
+wget -O cekgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/cekgrpc.sh"
+wget -O renewgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/renewgrpc.sh"
 
-wget -O addtrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/add/addtrgrpc.sh"
-wget -O deltrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/del/deltrgrpc.sh"
-wget -O cektrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/cek/cektrgrpc.sh"
-wget -O renewtrgrpc "https://raw.githubusercontent.com/izhanworks/izvpn2/main/cek/renewtrgrpc.sh"
+wget -O addtrgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/addtrgrpc.sh"
+wget -O deltrgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/deltrgrpc.sh"
+wget -O cektrgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/cektrgrpc.sh"
+wget -O renewtrgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/renewtrgrpc.sh"
 
 chmod +x addgrpc
 chmod +x delgrpc
