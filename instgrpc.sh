@@ -162,7 +162,7 @@ cat > /etc/rare/xray/conf/trojangrpc.json << EOF
 }
 EOF
 
-cat > /etc/xray/akuntrgrpc.conf << EOF
+cat > /etc/rare/xray/conf/akuntrgrpc.conf << EOF
 #xray-trojangrpc user
 EOF
 
