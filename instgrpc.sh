@@ -202,4 +202,4 @@ chmod +x cektrgrpc
 chmod +x renewtrgrpc
 
 cd
-rm /root/addongrpc.sh
+rm /root/instgrpc.sh
