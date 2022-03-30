@@ -7,7 +7,7 @@ echo "Checking VPS"
 #EDIT IZIN
 clear
 echo -n > /tmp/other.txt
-data=( `cat /etc/rare/xray/conf/vmessgrpc.json | grep '^###' | cut -d ' ' -f 2`);
+data=( `cat /etc/rare/xray/grpc/vmessgrpc.json | grep '^###' | cut -d ' ' -f 2`);
 echo "-------------------------------";
 echo "   XRAY GRPC VMess User Login";
 echo "-------------------------------";
