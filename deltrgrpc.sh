@@ -26,7 +26,7 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/rare/xray/grpc/akuntrgrpc.conf")
 	done
 user=$(grep -E "^### " "/etc/rare/xray/grpc/akuntrgrpc.conf" | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
 exp=$(grep -E "^### " "/etc/rare/xray/grpc/akuntrgrpc.conf" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
-sed -i "^### $user $exp/,/^},{/d" /etc/rare/xray/grpc/akuntrgrpc.conf
+sed -i "^### $user $exp/d" /etc/rare/xray/grpc/akuntrgrpc.conf
 sed -i "^### $user $exp/,/^},{/d" /etc/rare/xray/grpc/trojangrpc.json
 systemctl restart trgrpc
 service cron restart
