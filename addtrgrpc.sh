@@ -60,7 +60,7 @@ esac
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#xtrgrpc$/a\### '"$user $exp"'\
-},{"password": "'""$uuid""'","email": "'""$user""'"' /etc/rare/xray/grpc/trojangrpc.json
+},{"password": "'""$uuid""'" /etc/rare/xray/grpc/trojangrpc.json
 echo -e "### $user $exp" >> /etc/rare/xray/grpc/akuntrgrpc.conf
 systemctl restart xray.service
 trojanlink="trojan://${uuid}@${dom}:${tr}?security=tls&type=grpc&serviceName=GunService&sni=$sni#$user"
