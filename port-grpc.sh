@@ -11,8 +11,8 @@ MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
 clear
 
-tls=$(cat /etc/rare/xray/conf/vmessgrpc.json | grep port | sed 's/"//g' | sed 's/port//g' | sed 's/://g' | sed 's/,//g' | sed 's/       //g' | sed 's/      //g')
-none=$(cat /etc/rare/xray/conf/vlessgrpc.json | grep port | sed 's/"//g' | sed 's/port//g' | sed 's/://g' | sed 's/,//g' | sed 's/       //g' | sed 's/      //g')
+tls=$(cat /etc/rare/xray/grpc/vmessgrpc.json | grep port | sed 's/"//g' | sed 's/port//g' | sed 's/://g' | sed 's/,//g' | sed 's/       //g' | sed 's/      //g')
+none=$(cat /etc/rare/xray/grpc/vlessgrpc.json | grep port | sed 's/"//g' | sed 's/port//g' | sed 's/://g' | sed 's/,//g' | sed 's/       //g' | sed 's/      //g')
 echo -e "======================================"
 echo -e "         XRay GRPC Port Changer"
 echo -e ""
@@ -33,7 +33,7 @@ exit 0
 fi
 cek=$(netstat -nutlp | grep -w $tls1)
 if [[ -z $cek ]]; then
-sed -i "s/$tls/$tls1/g" /etc/rare/xray/conf/vmessgrpc.json
+sed -i "s/$tls/$tls1/g" /etc/rare/xray/grpc/vmessgrpc.json
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $tls -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $tls -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $tls1 -j ACCEPT
@@ -42,7 +42,7 @@ iptables-save > /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save > /dev/null
 netfilter-persistent reload > /dev/null
-systemctl restart v2ray > /dev/null
+systemctl restart vmess-grpc > /dev/null
 clear
 echo -e "${GREEN}Succesfully Changed XRay VMess GRPC Port To $tls1${NC}"
 else
@@ -57,7 +57,7 @@ exit 0
 fi
 cek=$(netstat -nutlp | grep -w $none1)
 if [[ -z $cek ]]; then
-sed -i "s/$none/$none1/g" /etc/rare/xray/conf/vlessgrpc.json
+sed -i "s/$none/$none1/g" /etc/rare/xray/grpc/vlessgrpc.json
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $none -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $none -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $none1 -j ACCEPT
@@ -66,7 +66,7 @@ iptables-save > /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save > /dev/null
 netfilter-persistent reload > /dev/null
-systemctl restart v2ray@none > /dev/null
+systemctl restart vless-grpc > /dev/null
 clear
 echo -e "${GREEN}Succesfully Change XRay VLess GRPC Port To $none1${NC}"
 else
