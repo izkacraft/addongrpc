@@ -1,4 +1,10 @@
 systemctl stop xray.service
+
+cd /etc/rare/xray
+mkdir –m777 grpc
+cd
+
+
 mkdir /etc/rare/xray/grpc
 cd /usr/bin
 
