@@ -28,10 +28,10 @@ echo -e "\E[44;1;39m       ⇱ XRAY TROJAN GRPC ⇲        \E[0m"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo ""
 
-tr="$(cat /etc/rare/xray/conf/trojangrpc.json | grep port | sed 's/"//g' | sed 's/port//g' | sed 's/://g' | sed 's/,//g' | sed 's/ //g')"
+tr="$(cat /etc/rare/xray/grpc/trojangrpc.json | grep port | sed 's/"//g' | sed 's/port//g' | sed 's/://g' | sed 's/,//g' | sed 's/ //g')"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
 		read -rp "Password : " -e user
-		user_EXISTS=$(grep -w $user /etc/rare/xray/conf/akuntrgrpc.conf | wc -l)
+		user_EXISTS=$(grep -w $user /etc/rare/xray/grpc/akuntrgrpc.conf | wc -l)
 
 		if [[ ${user_EXISTS} == '1' ]]; then
 			echo ""
@@ -60,8 +60,8 @@ esac
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#xtrgrpc$/a\### '"$user $exp"'\
-},{"password": "'""$uuid""'","email": "'""$user""'"' /etc/rare/xray/conf/trojangrpc.json
-echo -e "### $user $exp" >> /etc/xray/akuntrgrpc.conf
+},{"password": "'""$uuid""'","email": "'""$user""'"' /etc/rare/xray/grpc/trojangrpc.json
+echo -e "### $user $exp" >> /etc/rare/xray/grpc/akuntrgrpc.conf
 systemctl restart xray.service
 trojanlink="trojan://${uuid}@${dom}:${tr}?security=tls&type=grpc&serviceName=GunService&sni=$sni#$user"
 service cron restart
