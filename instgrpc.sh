@@ -3,7 +3,8 @@ systemctl stop xray.service
 cd /etc/rare/xray
 mkdir –m777 grpc
 cd
-
+read -p "Press Enter to Continue : "
+sleep 1
 
 mkdir /etc/rare/xray/grpc
 cd /usr/bin
@@ -16,6 +17,8 @@ chmod +x port-grpc
 
 wget -O menu-grpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/menu-grpc.sh"
 chmod +x menu-grpc
+read -p "Press Enter to Continue : "
+sleep 1
 
 service squid start
 domain=$(cat /root/domain)
@@ -69,7 +72,8 @@ LimitNOFILE=1000000
 WantedBy=multi-user.target
 EOF
 
-
+read -p "Press Enter to Continue : "
+sleep 1
 
 cat > /etc/rare/xray/grpc/vmessgrpc.json << EOF
 {
@@ -225,6 +229,9 @@ cat > /etc/rare/xray/grpc/akuntrgrpc.conf << EOF
 #xray-trojangrpc user
 EOF
 
+read -p "Press Enter to Continue : "
+sleep 1
+
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 800 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 800 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 880 -j ACCEPT
@@ -269,3 +276,5 @@ chmod +x renewtrgrpc
 cd
 rm /root/instgrpc.sh
 systemctl start xray.service
+read -p "Press Enter to Continue : "
+sleep 1
