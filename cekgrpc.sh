@@ -43,7 +43,7 @@ done
 oth=$(cat /tmp/other.txt | sort | uniq | nl)
 echo "$oth";
 echo "-------------------------------"
-dt=( `cat /etc/rare/xray/conf/vlessgrpc.json | grep '^###' | cut -d ' ' -f 2`);
+dt=( `cat /etc/rare/xray/grpc/vlessgrpc.json | grep '^###' | cut -d ' ' -f 2`);
 echo "-------------------------------";
 echo "   XRAY GRPC VLess User Login";
 echo "-------------------------------";
