@@ -11,6 +11,57 @@ wget -O menu-grpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/m
 chmod +x menu-grpc
 
 service squid start
+domain=$(cat /root/domain)
+uuid=$(cat /proc/sys/kernel/random/uuid)
+
+cat > /etc/systemd/system/trgrpc.service << EOF
+[Unit]
+Description=XRay Trojan Grpc Service
+Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
+After=network.target nss-lookup.target
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/etc/rare/xray/xray -config /etc/rare/xray/grpc/trojangrpc.json
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat > /etc/systemd/system/vless-grpc.service << EOF
+[Unit]
+Description=XRay VMess GRPC Service
+Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
+After=network.target nss-lookup.target
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/etc/rare/xray/xray -config /etc/rare/xray/grpc/vlessgrpc.json
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat > /etc/systemd/system/vmess-grpc.service << EOF
+[Unit]
+Description=XRay VMess GRPC Service
+Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
+After=network.target nss-lookup.target
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/etc/rare/xray/xray -config /etc/rare/xray/grpcvmessgrpc.json
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+[Install]
+WantedBy=multi-user.target
+EOF
+
 
 
 cat > /etc/rare/xray/grpc/vmessgrpc.json << EOF
@@ -180,6 +231,12 @@ iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
 systemctl daemon-reload
+systemctl enable vmess-grpc
+systemctl restart vmess-grpc
+systemctl enable vless-grpc
+systemctl restart vless-grpc
+systemctl enable trgrpc.service
+systemctl start trgrpc.service
 systemctl restart xray.service
 
 wget -O addgrpc "https://raw.githubusercontent.com/izhanworks/addongrpc/main/addgrpc.sh"
