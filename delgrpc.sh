@@ -35,8 +35,8 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/rare/xray/grpc/vmessgrpc.json")
 	done
 user=$(grep -E "^### " "/etc/rare/xray/grpc/vmessgrpc.json" | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
 exp=$(grep -E "^### " "/etc/rare/xray/grpc/vmessgrpc.json" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
-sed -i "/^### $user $exp/,/^},{/d" /etc/rare/xray/conf/vmessgrpc.json
-sed -i "/^### $user $exp/,/^},{/d" /etc/rare/xray/conf/vlessgrpc.json
+sed -i "/^### $user $exp/,/^},{/d" /etc/rare/xray/grpc/vmessgrpc.json
+sed -i "/^### $user $exp/,/^},{/d" /etc/rare/xray/grpc/vlessgrpc.json
 rm -f /etc/rare/xray/grpc/$user-tls.json
 systemctl restart vmess-grpc
 systemctl restart vless-grpc
