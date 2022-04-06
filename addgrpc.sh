@@ -49,8 +49,9 @@ EOF
 vmess_base641=$( base64 -w 0 <<< $vmess_json1)
 vmesslink1="vmess://$(base64 -w 0 /etc/rare/xray/grpc/$user-tls.json)"
 vlesslink1="vless://${uuid}@${dom}:${vl}?mode=gun&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=$sni#$user"
-systemctl restart vmess-grpc
-systemctl restart vless-grpc
+systemctl restart xray.service
+systemctl restart vmess-grpc.service
+systemctl restart vless-grpc.service
 service cron restart
 echo ""
 echo -e "================================="
