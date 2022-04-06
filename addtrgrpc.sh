@@ -63,6 +63,7 @@ sed -i '/#xtrgrpc$/a\### '"$user $exp"'\
 },{"password": "'""$uuid""'"' /etc/rare/xray/grpc/trojangrpc.json
 echo -e "### $user $exp" >> /etc/rare/xray/grpc/akuntrgrpc.conf
 systemctl restart xray.service
+systemctl restart trgrpc.service
 trojanlink="trojan://${uuid}@${dom}:${tr}?security=tls&type=grpc&serviceName=GunService&sni=$sni#$user"
 service cron restart
 clear
