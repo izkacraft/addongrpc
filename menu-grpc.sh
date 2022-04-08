@@ -20,7 +20,7 @@ LIGHT='\033[0;37m'
 clear
 echo ""
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\E[44;1;39m                ⇱  GRPC ADDON MENU  ⇲                    \E[0m"
+echo -e "\E[44;1;39m                 ⇱  GRPC ADDON MENU  ⇲                    \E[0m"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo ""
 echo -e " $blue[•1]$NC Create Grpc Vless Vmess Accounts                                   "
