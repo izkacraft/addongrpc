@@ -23,7 +23,7 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/rare/xray/grpc/vmessgrpc.json")
 	echo ""
 	echo " Select the existing client you want to remove"
 	echo " Press CTRL+C to return"
-	echo " ==============================="
+	echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 	echo "     No  Expired   User"
 	grep -E "^### " "/etc/rare/xray/grpc/vmessgrpc.json" | cut -d ' ' -f 2-3 | nl -s ') '
 	until [[ ${CLIENT_NUMBER} -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
@@ -42,10 +42,10 @@ systemctl restart vmess-grpc
 systemctl restart vless-grpc
 clear
 echo ""
-echo "==============================="
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo "  Xray/GRPC Account Deleted  "
-echo "==============================="
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo "Username  : $user"
 echo "Expired   : $exp"
-echo "==============================="
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo "Script By IzhanV"
