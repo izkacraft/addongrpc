@@ -25,7 +25,20 @@ uuid=$(cat /proc/sys/kernel/random/uuid)
 read -p "Expired (days): " masaaktif
 read -p "SNI (bug) : " sni
 read -p "ADDRESS (BUG) : " sub
-dom=$sub.$domain
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo "1. BUG as ADDRESS"
+echo "2. BUG as SNI"
+echo "3. BUG as BOTH"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+
+read -p "Input your choice : " sub2
+case $sub2 in
+1) dom=$sub.$domain ;;
+2) dom=$domain ;;
+3) dom=$sub.$domain ;;
+*) echo "Invalid entry"; sleep 3 ; exit ;;
+esac
+#dom=$sub.$domain
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/rare/xray/grpc/vmessgrpc.json
