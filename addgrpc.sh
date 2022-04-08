@@ -4,9 +4,9 @@
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
 clear
-echo -e "================================="
-echo -e "         XRAY GRPC               "
-echo -e "================================="
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\E[44;1;39m           ⇱ XRAY GRPC ⇲           \E[0m"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 
 domain=$(cat /root/domain)
 tls=$(cat /etc/rare/xray/grpc/vmessgrpc.json | grep port | awk '{print $2}' | sed 's/,//g')
@@ -54,9 +54,9 @@ systemctl restart vmess-grpc.service
 systemctl restart vless-grpc.service
 service cron restart
 echo ""
-echo -e "================================="
-echo -e "            XRAY GRPC            " 
-echo -e "================================="
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\E[44;1;39m           ⇱ XRAY GRPC ⇲           \E[0m"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "Remarks           : ${user}"
 echo -e "Domain            : ${domain}"
 echo -e "Port VMess        : ${tls}"
@@ -68,21 +68,21 @@ echo -e "Security          : TLS"
 echo -e "Type              : grpc"
 echo -e "Service Name      : GunService"
 echo -e "SNI               : $sni"
-echo -e "================================="
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "Link VMess GRPC  : "
 echo -e "${vmesslink1}"
-echo -e "================================="
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "Link VLess GRPC  : "
 echo -e "${vlesslink1}"
-echo -e "================================="
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "Expired On     : $exp"
-echo -e "=================================" 
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo ""
 echo -e "[1]  Tambah User Grpc"
 echo -e "[2]  Grpc Menu"
 echo -e "[3]  Menu Utama" 
 echo -e "[x]  Keluar" 
-echo -e "================================="
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 read -p "Pilihan :" menu
 case $menu in
 1) clear ; addgrpc ;;
