@@ -1,4 +1,4 @@
-# addongrpc
-add grpc service to vpnshopee vps script (rare)
+# addongrpc sideloading
+add grpc service to scvps vps script
 install script : 
-wget https://raw.githubusercontent.com/izhanworks/addongrpc/main/instgrpc.sh && chmod +x instgrpc.sh && ./instgrpc.sh
+wget https://raw.githubusercontent.com/izhanworks/addongrpc/main/addongrpc2/instgrpc.sh && chmod +x instgrpc.sh && ./instgrpc.sh
